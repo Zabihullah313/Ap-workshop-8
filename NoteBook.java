@@ -20,5 +20,16 @@ import java.util.Map;
             System.out.println("Note added successfully!");
         }
 
+        public void removeNote(String title) {
+            if (!notes.containsKey(title)) {
+                System.out.println("No note found with the given title.");
+                return;
+            }
+            notes.remove(title);
+            saveNotes();
+            System.out.println("Note removed successfully!");
+        }
+
+
 
 
