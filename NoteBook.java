@@ -10,4 +10,15 @@ import java.util.Map;
             loadNotes();
         }
 
+        public void addNote(String title, String content) {
+            if (notes.containsKey(title)) {
+                System.out.println("A note with this title already exists.");
+                return;
+            }
+            notes.put(title, new Note(title, content));
+            saveNotes();
+            System.out.println("Note added successfully!");
+        }
+
+
 
