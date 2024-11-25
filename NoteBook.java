@@ -1,3 +1,4 @@
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,6 +51,39 @@ import java.util.Map;
         }
 
 
+        private void saveNotes() {
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(saveFilePath))) {
+                oos.writeObject(notes);
+            } catch (IOException e) {
+                System.out.println("Error saving notes: " + e.getMessage());
+            }
+        }
+
+        private void loadNotes() {
+            File file = new File(saveFilePath);
+            if (!file.exists()) return;
+
+            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+                notes = (Map<String, Note>) ois.readObject();
+            } catch (IOException | ClassNotFoundException e) {
+                System.out.println("Error loading notes: " + e.getMessage());
+            }
+        }
 
 
+        public void exportNote(String title) {
+            if (!notes.containsKey(title)) {
+                System.out.println("No note found with the given title.");
+                return;
+            }
+            Note note = notes.get(title);
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter("export/" + title + ".txt"))) {
+                writer.write(note.toString());
+                System.out.println("Note exported successfully!");
+            } catch (IOException e) {
+                System.out.println("Error exporting note: " + e.getMessage());
+            }
+        }
 
+
+    }
