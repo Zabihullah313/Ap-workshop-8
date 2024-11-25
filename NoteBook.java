@@ -41,6 +41,14 @@ import java.util.Map;
             }
         }
 
+        public void viewNote(String title) {
+            if (!notes.containsKey(title)) {
+                System.out.println("No note found with the given title.");
+                return;
+            }
+            System.out.println(notes.get(title));
+        }
+
 
 
 
