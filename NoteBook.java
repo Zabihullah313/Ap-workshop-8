@@ -30,6 +30,18 @@ import java.util.Map;
             System.out.println("Note removed successfully!");
         }
 
+        public void listNotes() {
+            if (notes.isEmpty()) {
+                System.out.println("No notes available.");
+                return;
+            }
+            System.out.println("Available Notes:");
+            for (String title : notes.keySet()) {
+                System.out.println("- " + title);
+            }
+        }
+
+
 
 
 
